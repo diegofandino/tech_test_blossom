@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { customColors } from '../../utils/customColors'
 import { ICharacter } from '../../../models'
 
 import FavoriteFilledIcon from '../../../assets/icons/favorites_marked.png'
 import FavoriteUnfilledIcon from '../../../assets/icons/favorites_unmarked.png'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState'
 
 const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) => {
 
 	const navigate = useNavigate();
+	const params = useParams();
 	const { favoriteCharacters, addFavoriteCharacter, removeFavoriteCharacter } = useFavoriteCharactersStore();
 
 	const goDetailPage = () => {
@@ -32,7 +33,7 @@ const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) =
 	}
 
   return (
-	<div className='flex w-full items-center py-4 border-t-[1px] relative leading-4'>
+	<div className={`${params.id === id ? 'bg-[#EEE3FF] rounded-lg' : 'bg-white'} px-4 flex w-full items-center py-4 border-t-[1px] relative leading-4`}>
 		<div className='w-full flex items-center' role='button' onClick={goDetailPage}>
 			<img className='w-[32px] h-[32px] rounded-full' src={image} alt={`${name}-image`} />
 			<div className='flex flex-col ml-4 w-full text-left'>
@@ -43,9 +44,9 @@ const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) =
 		<div className='z-20' onClick={addToFavorites}>
 			{
 				isFavorite ? (
-					<img src={FavoriteFilledIcon} alt="favorite_icon" />
+					<img  className="cursor-pointer" src={FavoriteFilledIcon} alt="favorite_icon" />
 				) : (
-					<img src={FavoriteUnfilledIcon} alt="favorite_icon_unfilled" />
+					<img  className="cursor-pointer" src={FavoriteUnfilledIcon} alt="favorite_icon_unfilled" />
 				)
 			}
 		</div>

@@ -61,9 +61,9 @@ const CharacterDetail = () => {
 			<img className='w-[75px] h-[75px] rounded-full' src={characterData.image} alt={`${characterData.name}-image`} />
 			{
 				isFavoriteCharacter() ? (
-					<img onClick={addToFavorites} className='absolute bottom-0 -right-3' src={FavoriteFilledIcon} alt="favorite_icon" />
+					<img onClick={addToFavorites} className='cursor-pointer absolute bottom-0 -right-3' src={FavoriteFilledIcon} alt="favorite_icon" />
 				) : (
-					<img onClick={addToFavorites} className='absolute bottom-0 -right-3' src={FavoriteUnfilledIcon} alt="favorite_icon_unfilled" />
+					<img onClick={addToFavorites} className='cursor-pointer absolute bottom-0 -right-3' src={FavoriteUnfilledIcon} alt="favorite_icon_unfilled" />
 				)
 			}
 		</div>

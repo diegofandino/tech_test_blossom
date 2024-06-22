@@ -4,13 +4,11 @@ import ItemsMenu from '../../molecules/items-menu/ItemsMenu'
 import { customColors } from '../../utils/customColors'
 import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState'
 import ArrowSort from '../../../assets/icons/arrow_back.png';
-import { useCharactersGeneral } from '../../../global/charactersGeneral'
 
 const Items = ({title, Characters}: ItemsModelToShow) => {
 
 	const { favoriteCharacters } = useFavoriteCharactersStore();
 	const [isSorted, setIsSorted] = useState(false);
-
 
 	const sortCharacters = () => {
 		if (Characters && Characters.length > 0) {
@@ -30,7 +28,7 @@ const Items = ({title, Characters}: ItemsModelToShow) => {
 
   return (
 	<div>
-		<div className='flex justify-between'>
+		<div className='flex justify-between px-5'>
 			<h3 style={{color: customColors.grey_text}} className='text-sm uppercase text-left py-5'>{title} ({Characters?.length})</h3>
 			<button className='flex items-center' role='button' onClick={sortCharacters}>
 				<img className={`${!isSorted ? 'rotate-90' : '-rotate-90'}`} src={ArrowSort} alt="arrow_sort" />
