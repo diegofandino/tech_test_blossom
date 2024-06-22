@@ -12,11 +12,13 @@ import { ICharacter } from '../../../models';
 import { useCharactersGeneral } from '../../../global/charactersGeneral';
 import { useFilterStore } from '../../../global/filterState';
 import HeaderFilter from '../../molecules/header-custom/HeaderCustom';
+import { useDesignUi } from '../../../global/design-ui';
 
 const Sidebar = () => {
 
 	const { favoriteCharacters } = useFavoriteCharactersStore();
 	const { options }  = useFilterStore();
+	const { isMobile }  = useDesignUi();
 	const { characters, setCharacters, setCharactersOriginal } = useCharactersGeneral();
 	const { isOpenFilters } = useFilterStore();
 
@@ -50,19 +52,16 @@ const Sidebar = () => {
 	const getFavorite = () => {
 		const favoriteIds = favoriteCharacters.map(favoriteCharacter => favoriteCharacter.id);
 		const charactersFiltered = characters.filter(character => favoriteIds.includes(character.id));
-		console.log(charactersFiltered);
 		return charactersFiltered;
 	}
-
-	
 
 	if (loading) return <p>Loading...</p>;
 
 	return (
 	<div>
-		<div className={`${isOpenFilters ? 'hidden' : 'block'}`}>
+		<div className={`${isOpenFilters && isMobile ? 'hidden' : 'block'}`}>
 			{
-				options && options.specie?.length > 0 || options.status?.length > 0 ?
+				!isOpenFilters && options && options.specie?.length > 0 || !isOpenFilters && options.status?.length > 0 ?
 				(
 					<HeaderFilter />
 				) : (

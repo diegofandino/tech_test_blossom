@@ -5,6 +5,7 @@ import FilterOptions from '../../molecules/filter-options/FilterOptions';
 import { useFilterStore } from '../../../global/filterState';
 import { useCharactersGeneral } from '../../../global/charactersGeneral';
 import { ICharacter } from '../../../models';
+import { useDesignUi } from '../../../global/design-ui';
 
 const FilterOptionsMobile = () => {
 
@@ -12,6 +13,7 @@ const FilterOptionsMobile = () => {
 
 	const { charactersOriginal, setCharacters } = useCharactersGeneral();
 	const { openFilter } = useFilterStore();
+	const { isMobile } = useDesignUi();
 
 	const {
 		FILTER_OPTIONS_TITLE,
@@ -39,14 +41,21 @@ const FilterOptionsMobile = () => {
 	}
 
   return (
-	<div className='flex flex-col justify-between w-full h-full absolute left-0 top-0 bg-white z-20 p-5'>
+	<div className={`flex flex-col justify-between ${isMobile ? 'w-full h-full' : 'w-[343px] h-[auto] left-8 shadow-lg top-[130px] rounded-lg'} absolute left-0 top-0 bg-white z-20 p-5`}>
 		<div>
 			<div className='flex w-[100%] text-center justify-between'>
-				<button type='button' onClick={openFilter}>
-					<img src={BackIcon} alt="back_icon" />
-				</button>
-				<h3 className='text-base  text-left  py-5'>{FILTER_OPTIONS_TITLE}</h3>
-				<span></span>
+				{
+					isMobile && 
+					(
+						<>
+							<button type='button' onClick={openFilter}>
+								<img src={BackIcon} alt="back_icon" />
+							</button>
+							<h3 className='text-base  text-left  py-5'>{FILTER_OPTIONS_TITLE}</h3>
+							<span></span>
+						</>
+					)}
+				
 			</div>
 
 			<div>
@@ -55,7 +64,7 @@ const FilterOptionsMobile = () => {
 			</div>
 		</div>
 
-		<button onClick={filterData} disabled={areAllOptionsEmpty()} type='button' className={`min-w-[327px] w-[327px] h-[39px] mx-auto ${areAllOptionsEmpty() ? 'bg-[#F3F4F6]' : 'bg-[#8054C7]' } rounded-md`}>
+		<button onClick={filterData} disabled={areAllOptionsEmpty()} type='button' className={`w-full h-[39px] mx-auto ${areAllOptionsEmpty() ? 'bg-[#F3F4F6]' : 'bg-[#8054C7]' } rounded-md`}>
 			<span className={`${areAllOptionsEmpty() ? 'text-[#6B7280]' : 'text-white' }`}>{FILTER_OPTIONS_BUTTON_TEXT}</span>
 		</button>
 		
