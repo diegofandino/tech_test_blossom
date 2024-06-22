@@ -7,6 +7,8 @@ export const useFilterStore = create<IFilterState>((set, get) => ({
 		status: [],
 		specie: []	
 	},
+	isOpenFilters: false,
+	openFilter: () => set(( state ) => ({ ...state, isOpenFilters: !state.isOpenFilters }),),
 	removeOption: (option, type) => set(( state ) => {
 		const updatedOptions = { ...state.options };
 	
@@ -18,6 +20,7 @@ export const useFilterStore = create<IFilterState>((set, get) => ({
 	
 		return { ...state, options: updatedOptions };
 	},),
+	removeAllOptions: () => set(( state ) => ({ ...state, options: { status: [], specie: [] } }),),
 	setFilters: (option, type) => set(( state ) => {
 		const updatedOptions = { ...state.options };
 	

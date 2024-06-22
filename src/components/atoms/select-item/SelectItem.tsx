@@ -6,12 +6,17 @@ const SelectItem = ({optionName, titleFilter}: OptionModel ) => {
 
   const [selectedOption, setSelectedOption] = useState<boolean>(false);
 
-  const { setFilters, removeOption } = useFilterStore();
+  const { options, setFilters, removeOption } = useFilterStore();
+
+  useEffect(() => {
+    const isSelected = options[titleFilter.toLowerCase()]?.includes(optionName);
+    setSelectedOption(isSelected);
+  }, [optionName, options, titleFilter])
+  
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isSelected = !selectedOption;
     setSelectedOption(isSelected);
-    console.log(titleFilter.toLowerCase())
     if (isSelected) {
       setFilters(event.target.value, titleFilter.toLowerCase());
     } else {
