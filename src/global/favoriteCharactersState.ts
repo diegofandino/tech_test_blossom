@@ -17,14 +17,13 @@ export const useFavoriteCharactersStore = create<IFavoriteCharactersState>((set)
     favoriteCharacters: [],
     addFavoriteCharacter: (favoriteCharacter: ICharacter) => set((state) => ({
         favoriteCharacters: [...state.favoriteCharacters, {isFavorite: true, ...favoriteCharacter}],
-        favoriteCharactersOriginal: [...state.favoriteCharacters, {isFavorite: true, ...favoriteCharacter}]
+        favoriteCharactersOriginal: [...state.favoriteCharactersOriginal, {isFavorite: true, ...favoriteCharacter}]
     })),
     addFavoriteArrayCharacter: (favoriteCharacters: ICharacter[]) => set(() => ({ 
         favoriteCharacters: favoriteCharacters 
     })),
     removeFavoriteCharacter: (favoriteCharacter: ICharacter) => set((state) => ({
-        favoriteCharacters: state.favoriteCharacters.filter((character) => character.id !== favoriteCharacter.id),
-        favoriteCharactersOriginal: state.favoriteCharactersOriginal.filter((character) => character.id !== favoriteCharacter.id)
+        favoriteCharacters: [...state.favoriteCharacters.filter((character) => character.id !== favoriteCharacter.id)],
     })),
     filterFavoriteCharacters: (searchText: string) => set((state) => ({
         favoriteCharacters: searchText
