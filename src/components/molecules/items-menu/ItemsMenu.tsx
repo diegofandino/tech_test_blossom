@@ -17,8 +17,7 @@ const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) =
 	}
 
 	const addToFavorites = () => {
-		
-		if(favoriteCharactersOriginal.find(favoriteCharacter => favoriteCharacter.id === id)) {
+		if(favoriteCharactersOriginal.length > 0 && favoriteCharactersOriginal.find(favoriteCharacter => favoriteCharacter.id === id)) {
 			removeFavoriteCharacter({
 				id, name, status, image,
 				species
