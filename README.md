@@ -8,6 +8,12 @@
 3. Dirigirse al puerto http://localhost:5000 en donde se encontrará la app ya en funcionamiento.
 ```
 
+## Vercel server
+```
+Se realiza el deploy del aplicativo en:
+[Vercel - Test blossom react - typescript](https://tech-test-blossom.vercel.app/ )
+```
+
 ## Uso API GRAPHQL para traer información
 ```
 1. Principalmente se añade el provider de apollo que es el cliente que nos ayuda a hacer consultas con graphql y al endpoint donde se traerá toda la información
