@@ -10,4 +10,7 @@ export const stringsProject = {
 	ADVANCE_SEARCH_TITLE: 'Advanced search',
 	ADVANCE_SEARCH_TITLE_DONE_CLICK: 'Done',
 	ADVANCE_SEARCH_RESULTS: 'Results',
+	COMMENTS_ADD_PLACEHOLDER: 'Add a comment...',
+	COMMENTS_TITLE_PLACEHOLDER: 'Comments',
+	COMMENTS_ADD_BUTTON: 'Add',
 }

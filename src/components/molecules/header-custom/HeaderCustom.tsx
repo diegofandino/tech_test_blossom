@@ -4,6 +4,7 @@ import { stringsProject } from '../../utils/stringsProject';
 import { useFilterStore } from '../../../global/filterState';
 import { customColors } from '../../utils/customColors';
 import { useCharactersGeneral } from '../../../global/charactersGeneral';
+import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState';
 
 const HeaderFilter = () => {
 
@@ -14,6 +15,7 @@ const HeaderFilter = () => {
 
 	const { removeAllOptions } = useFilterStore();
 	const { characters ,setCharacters, charactersOriginal } = useCharactersGeneral();
+	const { addFavoriteArrayCharacter, favoriteCharactersOriginal } = useFavoriteCharactersStore()
 	const [counterFilters, setCounterFilters] = useState<number>(0)
 
 
@@ -34,6 +36,7 @@ const HeaderFilter = () => {
 	const returnAllOptions = () => {
 		removeAllOptions();
 		setCharacters(charactersOriginal);
+		addFavoriteArrayCharacter(favoriteCharactersOriginal);
 	}
 		
 	

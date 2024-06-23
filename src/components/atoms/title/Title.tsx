@@ -3,7 +3,7 @@ import { ITitle } from '../../../models'
 
 const Title = ({title}:ITitle) => {
   return (
-	<h1 className='text-2xl font-bold text-left'>{title}</h1>
+	<h1 className='text-2xl text-left'>{title}</h1>
   )
 }
 

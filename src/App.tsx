@@ -37,14 +37,14 @@ function App() {
           </div>
         </>
      ) : (
-      <div className='md:grid md:grid-cols-3'>
-          <div className='md:col-span-1'>
-            <Sidebar />
-          </div>
-          <div className='md:col-span-2'>
-            <Outlet />
-          </div>
+      <div className='md:flex md:gap-4'>
+        <div className='md:flex-2'>
+          <Sidebar />
         </div>
+        <div className='md:flex-1'>
+          <Outlet />
+        </div>
+      </div>
      )
      }
     </>
