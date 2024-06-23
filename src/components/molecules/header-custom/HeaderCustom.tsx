@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import BackIcon from '../../../assets/icons/arrow_back.png';
 import { stringsProject } from '../../utils/stringsProject';
 import { useFilterStore } from '../../../global/filterState';

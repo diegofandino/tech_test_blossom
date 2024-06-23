@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { ItemsModelToShow } from '../../../models'
 import ItemsMenu from '../../molecules/items-menu/ItemsMenu'
 import { customColors } from '../../utils/customColors'

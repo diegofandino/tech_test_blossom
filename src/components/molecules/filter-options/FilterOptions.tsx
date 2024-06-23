@@ -1,4 +1,3 @@
-import React from 'react'
 import SelectItem from '../../atoms/select-item/SelectItem'
 import { FilterOptionsModel } from '../../../models'
 import { customColors } from '../../utils/customColors'

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { customColors } from '../../utils/customColors'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
@@ -9,7 +9,6 @@ import { stringsProject } from '../../utils/stringsProject'
 import BackIcon from '../../../assets/icons/arrow_back.png';
 import FavoriteFilledIcon from '../../../assets/icons/favorites_marked.png';
 import FavoriteUnfilledIcon from '../../../assets/icons/favorites_unmarked.png';
-import { type } from '../../../models/index';
 import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState'
 import { useDesignUi } from '../../../global/design-ui'
 import { useCharactersGeneral } from '../../../global/charactersGeneral'

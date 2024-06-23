@@ -1,10 +1,8 @@
-import React from 'react'
 import { stringsProject } from '../../utils/stringsProject';
 import { customColors } from '../../utils/customColors';
 import SearchIcon from '../../../assets/icons/search_icon.png'
 import FilterIcon from '../../../assets/icons/filter.png'
 import { useCharactersGeneral } from '../../../global/charactersGeneral';
-import { ICharacter } from '../../../models';
 import { useFilterStore } from '../../../global/filterState';
 import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState';
 

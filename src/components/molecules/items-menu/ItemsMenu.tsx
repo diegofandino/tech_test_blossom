@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { customColors } from '../../utils/customColors'
 import { ICharacter } from '../../../models'
 
