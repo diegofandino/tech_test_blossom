@@ -1,33 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Outlet, useLocation } from 'react-router-dom'
 import './App.css'
+import Sidebar from './components/organisms/sidebar/Sidebar'
+import { useDesignUi } from './global/design-ui';
+import { useEffect } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const location = useLocation();
+  const { isMobile, setIsMobile } = useDesignUi();
+  const isMainRoute = location.pathname === '/';
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, [setIsMobile]);
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+     { isMobile ? (
+        <>
+          <div className={`${isMainRoute ? 'block' : 'hidden'}`}>
+            <Sidebar />
+          </div>
+          <div className={`${isMainRoute ? 'hidden' : 'block'}`}>
+            <Outlet />
+          </div>
+        </>
+     ) : (
+      <div className='md:flex md:gap-4'>
+        <div className='md:flex-2'>
+          <Sidebar />
+        </div>
+        <div className='md:flex-1'>
+          <Outlet />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+     )
+     }
     </>
   )
 }
