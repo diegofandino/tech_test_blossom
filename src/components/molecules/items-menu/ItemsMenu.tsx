@@ -10,14 +10,15 @@ const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) =
 
 	const navigate = useNavigate();
 	const params = useParams();
-	const { favoriteCharacters, addFavoriteCharacter, removeFavoriteCharacter } = useFavoriteCharactersStore();
+	const { favoriteCharactersOriginal, addFavoriteCharacter, removeFavoriteCharacter } = useFavoriteCharactersStore();
 
 	const goDetailPage = () => {
 		navigate(`/character-detail/${id}`);
 	}
 
 	const addToFavorites = () => {
-		if(favoriteCharacters.find(favoriteCharacter => favoriteCharacter.id === id)) {
+		
+		if(favoriteCharactersOriginal.find(favoriteCharacter => favoriteCharacter.id === id)) {
 			removeFavoriteCharacter({
 				id, name, status, image,
 				species
