@@ -41,3 +41,8 @@ Encontramos todas las interfaces y los tipos de datos que utilizamos a lo largo 
 ```
 Se utiliza atomic design como patrón de diseño para tener una manera más óptima de obtener información, manipular los datos y las vistas.
 ```
+
+## Test unitarios
+```
+Se realiza jest y testing library para realizar los test unitarios del aplicativo, cumpliendo con la norma de 3 test estos se incluyeron en: Title, HeaderCustom  y FilterOptions
+```

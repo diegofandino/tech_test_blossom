@@ -35,9 +35,8 @@ const Items = ({title, Characters}: ItemsModelToShow) => {
 	};
 
 	const isFavoriteItem = (id: string) => {
-		const isFavorite = favoriteCharacters.find(favoriteCharacter => favoriteCharacter.id === id);
-		return isFavorite && Object.keys(isFavorite).length > 0 ? true : false;
-	}
+        return favoriteCharacters.some(favoriteCharacter => favoriteCharacter.id === id);
+    };
 
   return (
 	<div>

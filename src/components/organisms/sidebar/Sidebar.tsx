@@ -26,7 +26,6 @@ const Sidebar = () => {
 		variables: { page: 1 },
 	});
 
-
 	const {
 		TITLE_INITIAL_PROJECT,
 		CHARACTERS_GET_TITLE,

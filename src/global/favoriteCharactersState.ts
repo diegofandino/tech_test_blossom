@@ -15,15 +15,24 @@ interface IFavoriteCharactersState {
 export const useFavoriteCharactersStore = create<IFavoriteCharactersState>((set) => ({
 	favoriteCharactersOriginal: [],
     favoriteCharacters: [],
-    addFavoriteCharacter: (favoriteCharacter: ICharacter) => set((state) => ({
-        favoriteCharacters: [...state.favoriteCharacters, {isFavorite: true, ...favoriteCharacter}],
-        favoriteCharactersOriginal: [...state.favoriteCharactersOriginal, {isFavorite: true, ...favoriteCharacter}]
-    })),
+	addFavoriteCharacter: (favoriteCharacter: ICharacter) => set((state) => {
+        if (state.favoriteCharacters.find(character => character.id === favoriteCharacter.id)
+		|| state.favoriteCharactersOriginal.find(character => character.id === favoriteCharacter.id)) {
+            return state;
+        }
+        const updatedCharacters = [...state.favoriteCharacters, { isFavorite: true, ...favoriteCharacter }];
+        const updatedCharactersOriginal = [...state.favoriteCharactersOriginal, { isFavorite: true, ...favoriteCharacter }];
+        return {
+            favoriteCharacters: updatedCharacters,
+            favoriteCharactersOriginal: updatedCharactersOriginal
+        };
+    }),
     addFavoriteArrayCharacter: (favoriteCharacters: ICharacter[]) => set(() => ({ 
         favoriteCharacters: favoriteCharacters 
     })),
     removeFavoriteCharacter: (favoriteCharacter: ICharacter) => set((state) => ({
         favoriteCharacters: [...state.favoriteCharacters.filter((character) => character.id !== favoriteCharacter.id)],
+        favoriteCharactersOriginal: [...state.favoriteCharactersOriginal.filter((character) => character.id !== favoriteCharacter.id)],
     })),
     filterFavoriteCharacters: (searchText: string) => set((state) => ({
         favoriteCharacters: searchText

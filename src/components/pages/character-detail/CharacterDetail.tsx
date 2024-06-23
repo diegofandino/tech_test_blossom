@@ -63,6 +63,7 @@ const CharacterDetail = () => {
 	const addCommentToCharacter = () => {
 		if (characters) {
 			const characterChoosed = characters.find(character => character.id === id);
+			const favoritesChoosed = favoriteCharacters.find(character => character.id === id);
 			if (characterChoosed && inputRef.current?.value) {
 				const updatedCharacter = {
 					...characterChoosed,
@@ -76,6 +77,17 @@ const CharacterDetail = () => {
 				);
 				setCharacters(updatedCharacters);
 				setCharactersOriginal(updatedCharacters);
+
+				if(favoritesChoosed && inputRef.current?.value) {
+					const updatedFavoriteCharacter = {
+						...favoritesChoosed,
+						comments: [...(favoritesChoosed.comments || []), {
+							id: Date.now(),
+							comment: inputRef.current.value
+						}]
+					};
+					addFavoriteCharacter(updatedFavoriteCharacter);
+				}
 				inputRef.current.value = '';
 				handleInputChange();
 			}

@@ -44,6 +44,7 @@ const FilterOptionsMobile = () => {
 		
 		if(options?.status.length === 1 && options?.status.includes('Starred')) {
 			addFavoriteArrayCharacter(favoriteCharactersOriginal);
+			setCharacters([]);
 			openFilter();
 			return;
 		}
