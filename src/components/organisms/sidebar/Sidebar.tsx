@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Title from '../../atoms/title/Title'
 import { stringsProject } from '../../utils/stringsProject';
 import SearchBar from '../../molecules/search-bar/SearchBar';
@@ -46,6 +46,7 @@ const Sidebar = () => {
 		}		
 		getFavoritesCharacters();
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[data]);
 
 	if (loading) return <p>Loading...</p>;

@@ -4,21 +4,30 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: [
+    'react',
+    'react-hooks',
+    'react-refresh',
+    '@typescript-eslint',
+  ],
   rules: {
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-uses-vars": 1,
-    "react/react-in-jsx-scope": 1,
-    "@typescript-eslint/no-unused-vars": "warn",
+    'react/jsx-uses-react': 'off', 
+    'react/react-in-jsx-scope': 'off', 
+    'react/jsx-uses-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
   },
-}
+  settings: {
+    react: {
+      version: 'detect', 
+    },
+  },
+};

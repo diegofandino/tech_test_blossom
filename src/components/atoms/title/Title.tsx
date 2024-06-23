@@ -1,4 +1,3 @@
-import React from 'react'
 import { ITitle } from '../../../models'
 
 const Title = ({title}:ITitle) => {

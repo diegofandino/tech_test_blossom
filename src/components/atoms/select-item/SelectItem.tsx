@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { OptionModel } from '../../../models';
 import { useFilterStore } from '../../../global/filterState';
 

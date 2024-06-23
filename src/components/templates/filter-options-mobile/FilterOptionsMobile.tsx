@@ -1,4 +1,3 @@
-import React from 'react'
 import BackIcon from '../../../assets/icons/arrow_back.png'
 import { stringsProject } from '../../utils/stringsProject';
 import FilterOptions from '../../molecules/filter-options/FilterOptions';
@@ -11,7 +10,7 @@ import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersSt
 const FilterOptionsMobile = () => {
 
 	const { options, areAllOptionsEmpty } = useFilterStore();
-	const { addFavoriteArrayCharacter, favoriteCharactersOriginal, favoriteCharacters } = useFavoriteCharactersStore();
+	const { addFavoriteArrayCharacter, favoriteCharactersOriginal } = useFavoriteCharactersStore();
 
 	const { charactersOriginal, setCharacters } = useCharactersGeneral();
 	const { openFilter } = useFilterStore();
