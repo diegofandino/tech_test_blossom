@@ -5,23 +5,17 @@ import FavoriteFilledIcon from '../../../assets/icons/favorites_marked.png'
 import FavoriteUnfilledIcon from '../../../assets/icons/favorites_unmarked.png'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState'
-import { useEffect } from 'react'
 
 const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) => {
 
 	const navigate = useNavigate();
 	const params = useParams();
-	const { favoriteCharacters, favoriteCharactersOriginal, addFavoriteCharacter, removeFavoriteCharacter } = useFavoriteCharactersStore();
+	const { favoriteCharactersOriginal, addFavoriteCharacter, removeFavoriteCharacter } = useFavoriteCharactersStore();
 
 	const goDetailPage = () => {
 		navigate(`/character-detail/${id}`);
 	}
 
-	useEffect(() => {
-		console.log("originales", favoriteCharactersOriginal);
-		console.log(favoriteCharacters);
-	}, [favoriteCharactersOriginal,favoriteCharacters])
-	
 	const addToFavorites = () => {
 		
 		if(favoriteCharactersOriginal.find(favoriteCharacter => favoriteCharacter.id === id)) {
