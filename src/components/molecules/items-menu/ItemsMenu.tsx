@@ -6,7 +6,7 @@ import FavoriteUnfilledIcon from '../../../assets/icons/favorites_unmarked.png'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState'
 
-const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) => {
+const ItemsMenu = ({id, name, status, image, isFavorite, species, comments}: ICharacter) => {
 
 	const navigate = useNavigate();
 	const params = useParams();
@@ -20,12 +20,12 @@ const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) =
 		if(favoriteCharactersOriginal.length > 0 && favoriteCharactersOriginal.find(favoriteCharacter => favoriteCharacter.id === id)) {
 			removeFavoriteCharacter({
 				id, name, status, image,
-				species
+				species, comments
 			});
 		} else {
 			addFavoriteCharacter({
 				id, name, status, image,
-				species
+				species, comments
 			});
 		}
 

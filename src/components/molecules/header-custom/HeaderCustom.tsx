@@ -13,9 +13,9 @@ const HeaderFilter = () => {
 		ADVANCE_SEARCH_RESULTS,
 		FILTER_OPTIONS_BUTTON_TEXT } = stringsProject;
 
-	const { removeAllOptions } = useFilterStore();
+	const { removeAllOptions, options } = useFilterStore();
 	const { characters ,setCharacters, charactersOriginal } = useCharactersGeneral();
-	const { addFavoriteArrayCharacter, favoriteCharactersOriginal } = useFavoriteCharactersStore()
+	const { addFavoriteArrayCharacter, favoriteCharactersOriginal, favoriteCharacters } = useFavoriteCharactersStore()
 	const [counterFilters, setCounterFilters] = useState<number>(0)
 
 
@@ -39,8 +39,6 @@ const HeaderFilter = () => {
 		addFavoriteArrayCharacter(favoriteCharactersOriginal);
 	}
 		
-	
-
   return (
 	<div className='flex flex-col '>
 		<div className='flex items-center w-[100%] text-center justify-between'>
@@ -53,7 +51,7 @@ const HeaderFilter = () => {
 			</button>
 		</div>
 		<div className='border-t-[1px] py-5 -mb-4 border-b-[1px] flex justify-between items-center'>
-			<span style={{color: customColors.blue_text}}>{characters.length} {ADVANCE_SEARCH_RESULTS}</span>
+			<span style={{color: customColors.blue_text}}>{options.status.includes('Starred') ? favoriteCharacters.length : characters.length} {ADVANCE_SEARCH_RESULTS}</span>
 			<div className='py-1 px-4 rounded-xl bg-[#E0F7D7]'>
 				<span style={{color: customColors.green_text}}>{counterFilters} {FILTER_OPTIONS_BUTTON_TEXT}</span>
 			</div>

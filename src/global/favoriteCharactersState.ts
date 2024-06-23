@@ -10,6 +10,7 @@ interface IFavoriteCharactersState {
 	filterFavoriteCharacters: (searchText: string) => void;
 	sortCharacterStarredAZ: (favoriteCharacter: ICharacter[]) => void;
 	sortCharacterStarredZA: (favoriteCharacter: ICharacter[]) => void;
+    updateFavoriteCharacter: (updatedCharacter: ICharacter) => void
 }
 
 export const useFavoriteCharactersStore = create<IFavoriteCharactersState>((set) => ({
@@ -25,6 +26,18 @@ export const useFavoriteCharactersStore = create<IFavoriteCharactersState>((set)
         return {
             favoriteCharacters: updatedCharacters,
             favoriteCharactersOriginal: updatedCharactersOriginal
+        };
+    }),
+	updateFavoriteCharacter: (updatedCharacter: ICharacter) => set((state) => {
+        const updateCharacterInArray = (characters: ICharacter[], updatedCharacter: ICharacter) => {
+            return characters.map(character => 
+                character.id === updatedCharacter.id ? updatedCharacter : character
+            );
+        };
+    
+        return {
+            favoriteCharacters: updateCharacterInArray(state.favoriteCharacters, updatedCharacter),
+            favoriteCharactersOriginal: updateCharacterInArray(state.favoriteCharactersOriginal, updatedCharacter)
         };
     }),
     addFavoriteArrayCharacter: (favoriteCharacters: ICharacter[]) => set(() => ({ 

@@ -55,6 +55,7 @@ const Items = ({title, Characters}: ItemsModelToShow) => {
 					name={character.name}
 					status={character.status}
 					image={character.image}
+					comments={character.comments}
 					isFavorite={isFavoriteItem(character.id)} species={character.species}				/>
 			))
 		}

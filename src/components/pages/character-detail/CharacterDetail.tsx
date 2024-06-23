@@ -19,7 +19,7 @@ const CharacterDetail = () => {
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const { isMobile } = useDesignUi();
 	const { characters, setCharacters, setCharactersOriginal } = useCharactersGeneral();
-	const { favoriteCharacters, addFavoriteCharacter, removeFavoriteCharacter } = useFavoriteCharactersStore();
+	const { favoriteCharacters, addFavoriteCharacter, removeFavoriteCharacter, updateFavoriteCharacter } = useFavoriteCharactersStore();
 	const {
 		DETAIL_SPECIE_TITLE,
 		DETAIL_STATUS_TITLE,
@@ -60,44 +60,51 @@ const CharacterDetail = () => {
         }
     }
 
-	const addCommentToCharacter = () => {
-		if (characters) {
-			const characterChoosed = characters.find(character => character.id === id);
-			const favoritesChoosed = favoriteCharacters.find(character => character.id === id);
-			if (characterChoosed && inputRef.current?.value) {
-				const updatedCharacter = {
-					...characterChoosed,
-					comments: [...(characterChoosed.comments || []), {
-						id: Date.now(),
-						comment: inputRef.current.value
-					}]
-				};
-				const updatedCharacters = characters.map(character =>
-					character.id === id ? updatedCharacter : character
-				);
-				setCharacters(updatedCharacters);
-				setCharactersOriginal(updatedCharacters);
 
-				if(favoritesChoosed && inputRef.current?.value) {
-					const updatedFavoriteCharacter = {
-						...favoritesChoosed,
-						comments: [...(favoritesChoosed.comments || []), {
-							id: Date.now(),
-							comment: inputRef.current.value
-						}]
-					};
-					addFavoriteCharacter(updatedFavoriteCharacter);
-				}
-				inputRef.current.value = '';
-				handleInputChange();
-			}
+	const addCommentToCharacter = () => {
+		const characterChoosed = characters.find(character => character.id === id);
+		const favoritesChoosed = favoriteCharacters?.find(character => character.id === id);
+		if (characterChoosed && inputRef.current?.value) {
+			const updatedCharacter = {
+				...characterChoosed,
+				comments: [...(characterChoosed.comments || []), {
+					id: Date.now(),
+					comment: inputRef.current.value
+				}]
+			};
+			const updatedCharacters = characters.map(character =>
+				character.id === id ? updatedCharacter : character
+			);
+			setCharacters(updatedCharacters);
+			setCharactersOriginal(updatedCharacters);
+			
+			if (favoritesChoosed && inputRef.current?.value) {
+			updateFavoriteCharacter({
+				...favoritesChoosed,
+				comments: [...(favoritesChoosed.comments || []),  {
+					id: Date.now(),
+					comment: inputRef.current.value
+				}]
+			});
+			setCharacters(updatedCharacters);
+			setCharactersOriginal(updatedCharacters);
+		}
+
+		inputRef.current.value = '';
+		handleInputChange();
 		}
 	}
 
 	useEffect(() => {
 		const characterChoosed = characters.find(character => character.id === id);
+		const favoritesChoosed = favoriteCharacters.find(character => character.id === id);
+		if(favoritesChoosed) {
+			setcharacterDetail(favoritesChoosed);
+			return;
+		}
 		setcharacterDetail(characterChoosed);
-	}, [characters, id]);
+	}, [setCharacters, characters, id, favoriteCharacters]);
+
 	
 	if (loading) return <p>Loading...</p>;
 
