@@ -6,10 +6,12 @@ import { useFilterStore } from '../../../global/filterState';
 import { useCharactersGeneral } from '../../../global/charactersGeneral';
 import { ICharacter } from '../../../models';
 import { useDesignUi } from '../../../global/design-ui';
+import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState';
 
 const FilterOptionsMobile = () => {
 
 	const { options, areAllOptionsEmpty } = useFilterStore();
+	const { addFavoriteArrayCharacter, favoriteCharactersOriginal, favoriteCharacters } = useFavoriteCharactersStore();
 
 	const { charactersOriginal, setCharacters } = useCharactersGeneral();
 	const { openFilter } = useFilterStore();
@@ -22,10 +24,11 @@ const FilterOptionsMobile = () => {
 
 	const filterData = () => {
 		setCharacters(charactersOriginal);
-		console.log('options', options);
+		addFavoriteArrayCharacter(favoriteCharactersOriginal);
 
 		if((options.specie?.includes('All') || options.status?.includes('All'))) {
 				setCharacters(charactersOriginal);
+				addFavoriteArrayCharacter(favoriteCharactersOriginal);
 				openFilter();
 				return;
 		}
@@ -34,9 +37,19 @@ const FilterOptionsMobile = () => {
 			(options.specie?.length === 0 || options.specie?.includes(character.species!)) &&
 			(options.status?.length === 0 || options.status?.includes(character.status))
 		);
-		console.log(filteredCharacters);
-
+		
+		const filteredCharactersStarred = favoriteCharactersOriginal.filter((character: ICharacter) =>
+			(options.specie?.length === 0 || options.specie?.includes(character.species!)) &&
+			(options.status?.length === 0 || options.status?.includes(character.status))
+		);
+		
+		if(options?.status.length === 1 && options?.status.includes('Starred')) {
+			addFavoriteArrayCharacter(favoriteCharactersOriginal);
+			openFilter();
+			return;
+		}
 		setCharacters(filteredCharacters);
+		addFavoriteArrayCharacter(filteredCharactersStarred);
 		openFilter();
 	}
 

@@ -10,7 +10,7 @@ import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersSt
 
 const SearchBar = () => {
 
-	const { favoriteCharactersOriginal, addFavoriteArrayCharacter } = useFavoriteCharactersStore();
+	const { filterFavoriteCharacters } = useFavoriteCharactersStore();
 	const { charactersOriginal, setCharacters } = useCharactersGeneral();
 	const { openFilter } = useFilterStore();
 
@@ -21,22 +21,13 @@ const SearchBar = () => {
 	const filterBySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const searchText = event.target.value.toLowerCase();
 
-		const filterCharacters = (characters: ICharacter[], searchText: string) => {
-            return characters.filter((character: ICharacter) =>
-                character.name.toLowerCase().includes(searchText)
-            );
-        };
-
 		const filteredCharacters = searchText !== '' 
-            ? filterCharacters(charactersOriginal, searchText) 
-            : charactersOriginal;
+		? charactersOriginal.filter((character) => character.name.toLowerCase().includes(searchText))
+		: charactersOriginal;
 
-			const filteredFavoriteCharacters = searchText !== '' 
-            ? filterCharacters(favoriteCharactersOriginal, searchText) 
-            : favoriteCharactersOriginal;
+		setCharacters(filteredCharacters);
 			
-        setCharacters(filteredCharacters);
-        addFavoriteArrayCharacter(filteredFavoriteCharacters);
+        filterFavoriteCharacters(searchText);
 	}
 
 

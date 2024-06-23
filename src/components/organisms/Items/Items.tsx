@@ -4,21 +4,34 @@ import ItemsMenu from '../../molecules/items-menu/ItemsMenu'
 import { customColors } from '../../utils/customColors'
 import { useFavoriteCharactersStore } from '../../../global/favoriteCharactersState'
 import ArrowSort from '../../../assets/icons/arrow_back.png';
+import { useCharactersGeneral } from '../../../global/charactersGeneral'
+import { stringsProject } from '../../utils/stringsProject'
 
 const Items = ({title, Characters}: ItemsModelToShow) => {
 
-	const { favoriteCharacters } = useFavoriteCharactersStore();
+	const { STARRED_CHARACTERS_GET_TITLE } = stringsProject;
+
+	const { favoriteCharacters, sortCharacterStarredZA, sortCharacterStarredAZ } = useFavoriteCharactersStore();
+	const { sortCharactersAZ, sortCharactersZA } = useCharactersGeneral();
 	const [isSorted, setIsSorted] = useState(false);
 
 	const sortCharacters = () => {
-		if (Characters && Characters.length > 0) {
-			if (isSorted) {
-			Characters.sort((a, b) => b.name.localeCompare(a.name));
+		if(Characters && Characters.length > 0) {
+			if(title === STARRED_CHARACTERS_GET_TITLE) {
+				if (isSorted) {
+					sortCharacterStarredZA(Characters);
+				} else {
+					sortCharacterStarredAZ(Characters);
+				}
 			} else {
-			Characters.sort((a, b) => a.name.localeCompare(b.name));
+				if (isSorted) {
+					sortCharactersAZ(Characters);
+				} else {
+					sortCharactersZA(Characters);
+				}
 			}
 			setIsSorted((prevState) => !prevState);
-		}
+		} 
 	};
 
 	const isFavoriteItem = (id: string) => {

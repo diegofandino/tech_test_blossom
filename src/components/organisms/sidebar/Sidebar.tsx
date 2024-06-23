@@ -48,13 +48,6 @@ const Sidebar = () => {
 
 	},[data]);
 
-
-	const getFavorite = () => {
-		const favoriteIds = favoriteCharacters.map(favoriteCharacter => favoriteCharacter.id);
-		const charactersFiltered = characters.filter(character => favoriteIds.includes(character.id));
-		return charactersFiltered;
-	}
-
 	if (loading) return <p>Loading...</p>;
 
 	return (
@@ -73,8 +66,8 @@ const Sidebar = () => {
 			}
 			
 			<div className='pt-5'>
-				<Items title={STARRED_CHARACTERS_GET_TITLE} Characters={getFavorite()} />
-				<Items title={CHARACTERS_GET_TITLE} Characters={characters} />
+				<Items title={STARRED_CHARACTERS_GET_TITLE} Characters={favoriteCharacters} />
+				<Items title={CHARACTERS_GET_TITLE} Characters={characters.filter(character => !favoriteCharacters.find(favoriteCharacter => favoriteCharacter.id === character.id))} />
 			</div>
 		</div>
 		{isOpenFilters && 

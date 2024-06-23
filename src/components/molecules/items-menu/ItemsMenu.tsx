@@ -21,12 +21,12 @@ const ItemsMenu = ({id, name, status, image, isFavorite, species}: ICharacter) =
 		if(favoriteCharacters.find(favoriteCharacter => favoriteCharacter.id === id)) {
 			removeFavoriteCharacter({
 				id, name, status, image,
-				species: ''
+				species
 			});
 		} else {
 			addFavoriteCharacter({
 				id, name, status, image,
-				species: ''
+				species
 			});
 		}
 
